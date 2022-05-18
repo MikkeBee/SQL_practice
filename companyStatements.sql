@@ -49,3 +49,14 @@ when salary>(select avg(salary) from employee) then 'above average'
 when salary<(select avg(salary) from employee) then 'below average'
 else 'average' end as "salary level" from employee
 inner join department on departmentNumber=departmentId;
+
+select departmentName, firstname from department left join employee on departmentNumber=departmentID;
+select departmentName, firstname from department left join employee on departmentNumber=departmentID where firstname is not null;
+select departmentName, firstname from department left join employee on departmentNumber=departmentID where firstname is null;
+
+select departmentName, count(employeeId) as "number of employees" from department left join employee on departmentNumber=departmentId group by departmentId;
+select departmentName, count(employeeId) as `number of employees` from department left join employee on departmentNumber=departmentId group by departmentId order by `number of employees`asc;
+select departmentName, count(employeeId) as numOfEmp from department left join employee on departmentNumber=departmentId group by departmentId having numOfEmp>=2 order by departmentName asc;
+select departmentName, count(employeeId) as numOfEmp, min(salary) as min from department inner join employee on departmentNumber=departmentId group by departmentId;
+select departmentName, count(employeeId) as numOfEmp, min(salary) as min, max(salary) as max, avg(salary) as average from department inner join employee on departmentNumber=departmentId group by departmentId;
+
